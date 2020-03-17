@@ -245,40 +245,81 @@ def main():
     print("r_2 statistic:{}".format(r2_score(y_test, y_test_pred)))
 
 # QUESTION 2
-    all_students = pd.read_csv('data.csv')
+    all_students  = pd.read_csv('data.csv')
     harmed = all_students[all_students['Harmful_Consumption'] == 1]
     healthy = all_students[all_students['Harmful_Consumption'] == 0]
-    urban_ratio_all = len(
-        all_students[all_students['address'] == 'R']) / len(all_students)
-    print(urban_ratio_all)
-    urban_ratio_harmed = len(harmed[harmed['address'] == 'R']) / len(harmed)
-    print(urban_ratio_harmed)
-    gender_rat = len(
-        all_students[all_students['sex'] == 'M']) / len(all_students)
-    gender_rat_harmed = len(harmed[harmed['sex'] == 'M']) / len(harmed)
-    print(gender_rat_harmed)
-    print(gender_rat)
-    len(all_students[all_students['sex'] == 'F']) / len(all_students)
-    len(harmed[harmed['sex'] == 'F']) / len(harmed)
-    names = ['Harmful consumption', 'All']
-    values = [(urban_ratio_harmed * 100) // 1, (urban_ratio_all * 100) // 1]
 
+    average_student_study = all_students['studytime'].mean()
+    harmful_consumer_study = harmed['studytime'].mean()
+    names = ['Harmful consumption', 'Average']
+    values = [harmful_consumer_study, average_student_study]
+    plt.figure(figsize=(15, 7))
+    plt.bar(names, values)
+    plt.ylim(1, 4)
+    plt.ylabel("scale 1-4")
+    plt.suptitle('Average amount of study time of both groups. Scale 1-4  ')
+    plt.show()
+
+    father = all_students[all_students['guardian'] == 'father']
+    mother = all_students[all_students['guardian'] == 'mother']
+    other  = all_students[all_students['guardian'] == 'other']
+    fnum = len(father[father['Harmful_Consumption'] == 1]) / len(father)
+    mnum = len(mother[mother['Harmful_Consumption'] == 1]) / len(mother)
+    onum = len(other[other['Harmful_Consumption'] == 1]) / len(other)
+    names = ['Father', 'Mother', 'other']
+    values = [fnum * 100, mnum * 100, onum * 100]
     plt.figure(figsize=(15, 7))
     plt.bar(names, values)
     plt.ylim(0, 50)
     plt.ylabel("Percentage")
-    plt.suptitle(
-        'Pertentage of Students in each group who live in rural areas')
+    plt.suptitle('Percentage of those who consume harmful amounts of alcohol by who their guardian is')
     plt.show()
-    names = ['Harmful consumption', 'All']
-    values = [(gender_rat_harmed * 100) // 1, (gender_rat * 100) // 1]
 
+    parent_edu = all_students['Medu'].mean() + all_students['Fedu'].mean() -1
+    parent_edu_harmed = harmed['Medu'].mean() + harmed['Fedu'].mean() -1
+    names = ['Harmful consumption', 'Average']
+    values = [parent_edu_harmed , parent_edu]
     plt.figure(figsize=(15, 7))
     plt.bar(names, values)
-    plt.ylim(0, 80)
+    plt.ylim(1, 7)
+    plt.ylabel("scale 1-7")
+    plt.suptitle('Average parental education of both groups. Scale 1-7  ')
+    plt.show()
+
+    urban_ratio_all = len(all_students[all_students['address'] == 'R']) / len(all_students)
+    urban_ratio_harmed = len(harmed[harmed['address'] == 'R']) / len(harmed)
+    names = ['Harmful consumption', 'All']
+    values = [round(urban_ratio_harmed * 100) , round(urban_ratio_all * 100)]
+    plt.figure(figsize=(15, 7))
+    plt.bar(names, values)
+    plt.ylim(0, 50)
+    plt.ylabel("Percentage")
+    plt.xlabel("Those with harmuful alcohol consumption vs average")
+    plt.suptitle('Pertentage of Students in each group who live in rural areas')
+    plt.show()
+
+    gender_rat = len(all_students[all_students['sex'] == 'M']) / len(all_students)
+    gender_rat_harmed = len(harmed[harmed['sex'] == 'M']) / len(harmed)
+    names = ['Harmful consumption', 'All']
+    values = [round(gender_rat_harmed * 100), round(gender_rat * 100)]
+    plt.figure(figsize=(15, 7))
+    plt.bar(names, values)
+    plt.ylim(0, 100)
     plt.ylabel("Percentage")
     plt.suptitle('Pertentage of Students in each group who are Male')
     plt.show()
+
+    healthy_fails = healthy['failures'].mean()
+    harm_fail = harmed['failures'].mean()
+    names = ['Harmful consumption', 'Those who don\'t consume harmful amoutns of alcohol']
+    values = [harm_fail,healthy_fails]
+    plt.figure(figsize=(15, 7))
+    plt.bar(names, values)
+    plt.ylim(0, 1)
+    plt.ylabel("average amount of classes faild")
+    plt.suptitle('Average amount of classes failed by group')
+    plt.show()
+
 
 # QUESTION 3
     def plot_tree(model, X, y):
