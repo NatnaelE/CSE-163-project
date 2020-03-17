@@ -138,6 +138,10 @@ def main():
     hist_func(my_dat, 1000, 20)
 
     def scat_plot_func(dt):
+        """
+        This function takes the data and manuplate it. Generate a scatter plt
+        for students' study time vs mean grade score
+        ""
         plt.scatter(my_dat["studytime"], my_dat["Mean_Grade"], s=my_dat["G3"])
         plt.xlabel("Study Time")
         plt.ylabel("Mean Grade Score")
@@ -180,6 +184,10 @@ def main():
     modified_plot(my_dat)
 
     def lin_plt_famedu_alc(dt):
+        """
+        This function takes the data and manuplate it. Generate the plot for
+        parent education vs student alcohol consumption
+        """
             # Select the target data
         ne_data = my_dat.drop(["famsize", "famsup"], axis=1)
         # Plotting the sns for the given data
@@ -199,6 +207,10 @@ def main():
     lin_plt_famedu_alc(my_dat)
 
     def alc_absc_pl(dt):
+        """ 
+        The function takes the data and generate a plot that shows alcohol
+        consumption vs absence from school
+        """
             # select the target data
         ne_data = dt.drop(["famsize", "famsup"], axis=1)
         # plotting command
