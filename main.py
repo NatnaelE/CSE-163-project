@@ -138,10 +138,8 @@ def main():
     hist_func(my_dat, 1000, 20)
 
     def scat_plot_func(dt):
-        """
-        This function takes the data and manuplate it. Generate a scatter plt
-        for students' study time vs mean grade score
-        ""
+        """ This function takes the data and manuplate it. Generate a scatter plt
+        for students' study time vs mean grade score ""
         plt.scatter(my_dat["studytime"], my_dat["Mean_Grade"], s=my_dat["G3"])
         plt.xlabel("Study Time")
         plt.ylabel("Mean Grade Score")
@@ -151,10 +149,8 @@ def main():
     scat_plot_func(my_dat)
 
     def famedu_grad_plt(dt):
-        """
-        This function takes the data and generate a line
-        plot for parents education level and mean grade score
-        """
+        """This function takes the data and generate a line
+        plot for parents education level and mean grade score """
         ne_data = dt.drop(["famsize", "famsup"], axis=1)
         sns.relplot(x="Fedu", y="Mean_Grade", data=ne_data, kind="line")
         plt.title('Father education vs. mean period grade')
@@ -184,10 +180,8 @@ def main():
     modified_plot(my_dat)
 
     def lin_plt_famedu_alc(dt):
-        """
-        This function takes the data and manuplate it. Generate the plot for
-        parent education vs student alcohol consumption
-        """
+        """ This function takes the data and manuplate it and Generate the plot for
+        parent education vs student alcohol consumption"""
             # Select the target data
         ne_data = my_dat.drop(["famsize", "famsup"], axis=1)
         # Plotting the sns for the given data
